@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" Mesure le temps moyen d'exécution de plusieurs coroutines asynchrones. """
 import time
 wait_n = __import__('1-concurrent_coroutines').wait_n
 

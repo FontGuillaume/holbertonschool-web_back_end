@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" Lance plusieurs tâches asynchrones et retourne leurs délais triés. """
 import asyncio
 from typing import List
 task_wait_random = __import__('3-tasks').task_wait_random

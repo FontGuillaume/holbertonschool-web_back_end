@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" Lance plusieurs coroutines asynchrones et retourne leurs délais d'exécution. """
 import asyncio
 from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
