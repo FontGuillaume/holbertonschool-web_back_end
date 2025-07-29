@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-""" Lance plusieurs coroutines asynchrones et retourne leurs délais d'exécution. """
+""" Lance plusieurs coroutines asynchrones et
+retourne leurs délais d'exécution. """
 import asyncio
 from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
@@ -19,8 +20,5 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
         chaque coroutine, triés par ordre d'achèvement.
     """
     tasks = [wait_random(max_delay) for _ in range(n)]
-    delays = []
-    for task in asyncio.as_completed(tasks):
-        delay = await task
-        delays.append(delay)
-    return delays
+    delay = [await tasks for tasks in asyncio.as_completed(tasks)]
+    return delay
