@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" Coroutine asynchrone qui attend un délai aléatoire et le retourne. """
 import random
 import asyncio
 
