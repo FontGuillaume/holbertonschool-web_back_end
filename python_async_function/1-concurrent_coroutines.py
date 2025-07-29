@@ -3,9 +3,11 @@ import asyncio
 from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
 
+
 async def wait_n(n: int, max_delay: int) -> List[float]:
     """
-    Exécute de façon concurrente n coroutines wait_random avec un délai maximum donné,
+    Exécute de façon concurrente n coroutines
+    wait_random avec un délai maximum donné,
     et retourne la liste des délais obtenus, dans l'ordre d'achèvement.
 
     Args:
@@ -13,7 +15,8 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
         max_delay (int): Délai maximum à passer à chaque coroutine.
 
     Returns:
-        list: Liste des délais retournés par chaque coroutine, triés par ordre d'achèvement.
+        list: Liste des délais retournés par
+        chaque coroutine, triés par ordre d'achèvement.
     """
     # Création de la liste des coroutines à exécuter
     tasks = [wait_random(max_delay) for _ in range(n)]
@@ -23,8 +26,3 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
         delay = await tasks
         results.append(delay)
     return results
-
-
-
-
-
