@@ -19,4 +19,4 @@ def measure_time(n: int, max_delay: int) -> float:
     wait_n(n, max_delay)
     end = time.time()  # Arrête le chronomètre
     # Calcule le temps moyen par coroutine
-    return (end - start) / n
+    return (end - start) % n
