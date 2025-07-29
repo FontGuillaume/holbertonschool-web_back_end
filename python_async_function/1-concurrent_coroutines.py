@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-import random
 import asyncio
+from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
 
-async def wait_n(n, max_delay):
+async def wait_n(n: int, max_delay: int) -> List[float]:
     """
     Exécute de façon concurrente n coroutines wait_random avec un délai maximum donné,
     et retourne la liste des délais obtenus, dans l'ordre d'achèvement.
