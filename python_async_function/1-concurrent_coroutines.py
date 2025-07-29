@@ -23,6 +23,5 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     results = []
     # Parcours des coroutines au fur et à mesure qu'elles se terminent
     for tasks in asyncio.as_completed(tasks):
-        delay = await tasks
-        results.append(delay)
+        results.append(await tasks)
     return results
