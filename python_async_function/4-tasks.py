@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import asyncio
 from typing import List
-wait_random = __import__('0-basic_async_syntax').wait_random
 task_wait_random = __import__('3-tasks').task_wait_random
 
 
@@ -21,8 +20,5 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
     """
     # Création de la liste des tâches à exécuter
     tasks = [task_wait_random(max_delay) for _ in range(n)]
-    results = []
-    # Parcours des tâches au fur et à mesure qu'elles se terminent
-    for task in asyncio.as_completed(tasks):
-        results.append(await task)
-    return results
+    delay = await asyncio.gather(*tasks)
+    return delay
