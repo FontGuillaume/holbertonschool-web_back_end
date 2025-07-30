@@ -14,7 +14,7 @@ temps total écoulé en secondes.
 """
 
 
-async def measure_runtime():
+async def measure_runtime() -> float:
     start_time = time.time()
     await asyncio.gather(
         async_comprehension(),
