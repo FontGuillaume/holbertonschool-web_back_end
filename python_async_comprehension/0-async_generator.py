@@ -6,10 +6,9 @@ seconde entre chaque génération.
 """
 import asyncio
 import random
-import typing
 
 
-async def async_generator() -> typing.Generator(float, None, None):
+async def async_generator():
     """
     Fonction asynchrone qui génère 10 nombres aléatoires.
     À chaque itération, elle attend 1 seconde avant de produire
