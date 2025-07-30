@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Ce module définit une coroutine qui collecte les
+valeurs générées par async_generator dans une liste.
+"""
 async_generator = __import__('0-async_generator').async_generator
 
 """

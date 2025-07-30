@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Ce script mesure le temps d'exécution de quatre
+coroutines async_comprehension lancées en parallèle.
+"""
 import time
 import asyncio
 async_comprehension = __import__('1-async_comprehension').async_comprehension

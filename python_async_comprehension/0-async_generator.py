@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+Ce module contient une coroutine qui génère dix
+nombres flottants aléatoires avec une pause d'une
+seconde entre chaque génération.
+"""
 import asyncio
 import random
 import typing
