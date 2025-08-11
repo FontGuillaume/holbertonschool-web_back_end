@@ -107,31 +107,80 @@ class Server:
 
         # Retourne une liste vide si la page est hors limites
         return []
-    
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
+        """
+        Retourne les informations de pagination dans un format hypermédia.
+
+        Cette méthode implémente la pagination hypermédia
+          (HATEOAS - Hypermedia as the Engine
+        of Application State) en retournant non
+        seulement les données de la page demandée,
+        mais aussi les métadonnées de navigation
+        (page précédente, suivante, totale, etc.).
+
+        Args:
+            page (int, optional): Numéro de la page
+            à récupérer (commence à 1). Défaut: 1
+            page_size (int, optional): Nombre d'éléments par page. Défaut: 10
+
+        Returns:
+            dict: Dictionnaire contenant les informations
+            de pagination avec les clés:
+                - page_size (int): Taille de la page demandée
+                - page (int): Numéro de la page actuelle
+                - data (List[List]): Données de la page actuelle
+                - next_page (int|None): Numéro de la page
+                suivante ou None si dernière page
+                - prev_page (int|None): Numéro de la page
+                précédente ou None si première page
+                - total_pages (int): Nombre total de pages dans le dataset
+
+        Examples:
+            >>> server = Server()
+            >>> server.get_hyper(2, 5)
+            {
+                'page_size': 5,
+                'page': 2,
+                'data': [...],
+                'next_page': 3,
+                'prev_page': 1,
+                'total_pages': 42
+            }
+        """
+        # Récupération du dataset complet pour calculer les métadonnées
         data = self.dataset()
+
+        # Récupération des données de la page courante via la méthode existante
         current_data = self.get_page(page, page_size)
+
+        # Calcul du nombre total de pages
+        # nécessaires pour contenir toutes les données
+        # math.ceil() arrondit à l'entier supérieur (ex: 10.1 pages → 11 pages)
         total_pages = math.ceil(len(data) / page_size)
+
+        # Détermination de la page suivante
+        # S'il y a encore des pages après la page actuelle
         if page < total_pages:
             next_page = page + 1
         else:
+            # Dernière page atteinte, pas de page suivante
             next_page = None
 
+        # Détermination de la page précédente
+        # S'il y a des pages avant la page actuelle
         if page > 1:
             prev_page = page - 1
         else:
+            # Première page, pas de page précédente
             prev_page = None
 
+        # Retour du dictionnaire avec toutes les informations de pagination
         return {
-            'page_size': page_size,
-            'page': page,
-            'data': current_data,
-            'next_page': next_page,
-            'prev_page': prev_page,
-            'total_pages': total_pages
+            'page_size': page_size,      # Taille de page demandée
+            'page': page,                # Page courante
+            'data': current_data,        # Données de la page courante
+            'next_page': next_page,      # Page suivante (ou None)
+            'prev_page': prev_page,      # Page précédente (ou None)
+            'total_pages': total_pages   # Nombre total de pages
         }
-
-
-
-
-
