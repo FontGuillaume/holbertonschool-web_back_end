@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Module de pagination simple pour une base de données de noms de bébés populaires.
+Module de pagination simple pour une base
+de données de noms de bébés populaires.
 
 Ce module implémente une classe Server qui permet de paginer efficacement
 un dataset CSV en utilisant la fonction helper index_range.
@@ -16,10 +17,10 @@ index_range = __import__('0-simple_helper_function').index_range
 class Server:
     """
     Classe Server pour paginer une base de données de noms de bébés populaires.
-    
+
     Cette classe charge un fichier CSV contenant des données de noms de bébés
     et fournit des méthodes pour accéder aux données de manière paginée.
-    
+
     Attributes:
         DATA_FILE (str): Chemin vers le fichier CSV contenant les données
         __dataset (List[List] | None): Cache privé pour stocker le dataset
@@ -29,7 +30,7 @@ class Server:
     def __init__(self):
         """
         Initialise une nouvelle instance de Server.
-        
+
         Le dataset n'est pas chargé immédiatement mais sera mis en cache
         lors du premier accès via la méthode dataset().
         """
@@ -38,15 +39,15 @@ class Server:
     def dataset(self) -> List[List]:
         """
         Retourne le dataset mis en cache.
-        
+
         Cette méthode implémente un pattern de lazy loading : les données
         ne sont chargées qu'au premier appel et mises en cache pour les
         appels suivants.
-        
+
         Returns:
             List[List]: Dataset sans la ligne d'en-tête, chaque ligne
                        étant une liste de chaînes de caractères.
-        
+
         Note:
             La première ligne (en-têtes) est automatiquement supprimée
             du dataset retourné.
@@ -66,23 +67,24 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
         Retourne une page spécifique du dataset.
-        
+
         Cette méthode utilise la fonction index_range pour calculer les indices
         appropriés et retourne la portion correspondante du dataset.
-        
+
         Args:
             page (int, optional): Numéro de la page à récupérer (commence à 1).
                                  Défaut: 1
             page_size (int, optional): Nombre d'éléments par page.
                                       Défaut: 10
-        
+
         Returns:
             List[List]: Liste des lignes pour la page demandée.
                        Retourne une liste vide si la page est hors limites.
-        
+
         Raises:
-            AssertionError: Si page ou page_size ne sont pas des entiers positifs.
-        
+            AssertionError: Si page ou page_size ne sont
+            pas des entiers positifs.
+
         Examples:
             >>> server = Server()
             >>> server.get_page(1, 5)  # Première page, 5 éléments
@@ -91,20 +93,17 @@ class Server:
         # Validation des paramètres d'entrée
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
-        
+
         # Récupération du dataset complet
         data = self.dataset()
-        
+
         # Calcul des indices de début et de fin pour la page demandée
         start_index, end_index = index_range(page, page_size)
-        
+
         # Vérification que la page demandée existe dans le dataset
         # Si l'index de début est valide, on retourne la tranche
         if start_index < len(data) or end_index > len(data):
             return data[start_index:end_index]
-        
+
         # Retourne une liste vide si la page est hors limites
         return []
-
-
-
