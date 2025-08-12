@@ -63,12 +63,12 @@ class Server:
             AssertionError: Si l'index est hors des limites du dataset.
         """
         # Récupération du dataset pour validation des limites
-        data = self.dataset()
         # Validation que l'index est dans les limites valides (0 <= index <
         # len)
-        assert 0 <= index < len(data)
-        # Récupération du dataset indexé pour accès par clé
         indexed_data = self.indexed_dataset()
+        assert 0 <= index < len(indexed_data)
+        # Récupération du dataset indexé pour accès par clé
+        
         # Liste pour stocker les données de la page courante
         current_data = []
         # Calcul de l'index de départ pour la page suivante
