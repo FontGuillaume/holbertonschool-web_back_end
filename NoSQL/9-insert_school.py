@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-# Fonction pour insérer un document dans une collection MongoDB
+""" Fonction pour insérer un document dans une collection MongoDB
+"""
+
 
 def insert_school(mongo_collection, **kwargs):
     """
