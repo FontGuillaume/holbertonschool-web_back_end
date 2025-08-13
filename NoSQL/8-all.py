@@ -9,9 +9,8 @@ def list_all(mongo_collection):
     Returns:
         Liste de tous les documents, ou liste vide si aucun document.
     """
-    result = mongo_collection.count_documents({})
-    if result == 0:
+    if mongo_collection is None:
         return []
     else:
-        documents = list(mongo_collection.find())
+        documents = (mongo_collection.find())
         return documents
