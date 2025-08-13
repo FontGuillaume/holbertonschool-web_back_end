@@ -4,5 +4,6 @@ def list_all(mongo_collection):
     if result == 0:
         return []
     else:
-        return list(mongo_collection.find())
+        documents = list(mongo_collection.find())
+        return documents
     
