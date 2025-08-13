@@ -13,4 +13,4 @@ def list_all(mongo_collection):
         return []
     else:
         documents = (mongo_collection.find())
-        return documents
+        return list(documents)
