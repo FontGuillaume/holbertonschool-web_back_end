@@ -5,5 +5,5 @@ process.stdin.on('data', (data) => {
   console.log(`Your name is: ${name}`);
 });
 process.stdin.on('end', () => {
-  console.log('This important software is now closing');
+  console.log('This important software is now closing\n');
 });
