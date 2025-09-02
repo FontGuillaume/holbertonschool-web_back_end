@@ -3,20 +3,20 @@ const fs = require('fs').promises;
 function countStudents(path) {
   return fs.readFile(path, 'utf8')
     .then((data) => {
-      const lines = data.split('\n');
-      const students = lines.slice(1).filter(line => line.trim() !== '');
+      const lines = data.split('\n').map(line => line.trim()).filter(line => line);
+      const students = lines.slice(1);
       console.log(`Number of students: ${students.length}`);
-      const fields = {};
-      students.forEach((line) => {
-        const parts = line.split(',');
-        const firstname = parts[0].trim();
-        const field = parts[parts.length - 1].trim();
-        if (!fields[field]) fields[field] = [];
-        fields[field].push(firstname);
-      });
-      Object.keys(fields).forEach((field) => {
-        const list = fields[field].join(', ');
-        console.log(`Number of students in ${field}: ${fields[field].length}. List: ${list}`);
+
+      // Regroupement par filière
+      const fields = students.reduce((acc, line) => {
+        const [firstname, , , field] = line.split(',');
+        if (!acc[field]) acc[field] = [];
+        acc[field].push(firstname);
+        return acc;
+      }, {});
+
+      Object.entries(fields).forEach(([field, names]) => {
+        console.log(`Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`);
       });
     })
     .catch(() => Promise.reject(new Error('Cannot load the database')));
