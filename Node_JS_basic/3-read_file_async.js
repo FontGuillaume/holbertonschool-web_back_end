@@ -7,7 +7,7 @@ async function countStudents(path) {
         const students = lines.slice(1);
         const validStudents = students.filter(line => line.trim() !== '');
         const total = validStudents.length;
-        console.log(`Number of students : ${total}`);
+        console.log(`Number of students: ${total}`);
         const fields = {};
 
         validStudents.forEach((line) => {
@@ -30,7 +30,6 @@ async function countStudents(path) {
     } catch {
         throw new Error('Cannot load the database');
     }
-    
 }
 
 module.exports = countStudents;
