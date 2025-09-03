@@ -18,8 +18,8 @@ const app = http.createServer((req, res) => {
 
     // Remplace console.log pour capturer
     console.log = (message) => {
-      capturedOutput += message + '\n';
-    }
+      capturedOutput += `${message}\n`;
+    };
 
     // Appel countStudents (qui va faire ses consoles.log)
     countStudents(databasePath)
@@ -32,9 +32,9 @@ const app = http.createServer((req, res) => {
         res.end();
       })
       .catch(() => {
-        // Restaure console.log en cas d'erreur aussi 
+        // Restaure console.log en cas d'erreur aussi
         console.log = originalLog;
-        
+
         res.write('Cannot load the database');
         res.end();
       });
