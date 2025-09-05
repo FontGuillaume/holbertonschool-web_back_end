@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const readDatabase = (filePath) => new Promise ((resolve, reject) => {
+const readDatabase = (filePath) => new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             reject(new Error('Cannot load the database'));
@@ -23,7 +23,7 @@ const readDatabase = (filePath) => new Promise ((resolve, reject) => {
                 fields[field].push(firstname);
             });
                 
-            resolve (fields);
+            resolve(fields);
 
         } catch (error) {
             reject(new Error('Cannot load the database'));

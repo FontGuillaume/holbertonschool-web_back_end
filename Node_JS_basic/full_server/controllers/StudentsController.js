@@ -10,7 +10,7 @@ class StudentsController {
 
         sortedFields.forEach((field) => {
           const students = fields[field];
-          output += `Number of students in ${field}: ${students.length}. List:${students.join(', ')}\n`;
+          output += `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}\n`;
         });
 
         response.status(200).send(output.trim());
@@ -25,7 +25,7 @@ class StudentsController {
     const { major } = request.params;
     const databasePath = process.argv[2];
     if (major !== 'CS' && major !== 'SWE') {
-      response.status(500).send('major parameter must be CS or SWE');
+      response.status(500).send('Major parameter must be CS or SWE');
       return;
     }
 
